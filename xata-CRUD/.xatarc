@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Melinda-s-workspace-o3ejv4.eu-central-1.xata.sh/db/xata-CRUD",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
