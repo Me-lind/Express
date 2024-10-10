@@ -7,31 +7,32 @@ import type {
 } from "@xata.io/client";
 
 const tables = [
+  { name: "example", columns: [] },
   {
     name: "products",
     columns: [
       { name: "name", type: "text" },
-      { name: "description", type: "text" },
-      { name: "price", type: "float" },
       { name: "category", type: "text" },
+      { name: "price", type: "float" },
+      { name: "description", type: "text" },
       { name: "stock", type: "int" },
+      { name: "productId", type: "int", unique: true },
     ],
   },
-  { name: "example", columns: [] },
 ] as const;
 
 export type SchemaTables = typeof tables;
 export type InferredTypes = SchemaInference<SchemaTables>;
 
-export type Products = InferredTypes["products"];
-export type ProductsRecord = Products & XataRecord;
-
 export type Example = InferredTypes["example"];
 export type ExampleRecord = Example & XataRecord;
 
+export type Products = InferredTypes["products"];
+export type ProductsRecord = Products & XataRecord;
+
 export type DatabaseSchema = {
-  products: ProductsRecord;
   example: ExampleRecord;
+  products: ProductsRecord;
 };
 
 const DatabaseClient = buildClient();
