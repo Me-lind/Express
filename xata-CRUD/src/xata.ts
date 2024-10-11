@@ -5,6 +5,8 @@ import type {
   SchemaInference,
   XataRecord,
 } from "@xata.io/client";
+import dotenv from "dotenv"; // Import dotenv
+dotenv.config(); // Load .env file
 
 const tables = [
   { name: "example", columns: [] },
@@ -34,7 +36,11 @@ export type DatabaseSchema = {
   example: ExampleRecord;
   products: ProductsRecord;
 };
+const apiKey = process.env.XATA_API_KEY; // Ensure you read from .env file
 
+if (!apiKey) {
+  throw new Error("API key is missing. Please add XATA_API_KEY to your .env file.");
+}
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
